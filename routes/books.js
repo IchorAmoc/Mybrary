@@ -26,7 +26,6 @@ router.get('/', async (req, res) => {
     } catch {
         res.redirect('/');
     }
-    
 
 })
 
@@ -50,7 +49,7 @@ router.post('/', async (req, res) => {
         const newBook = await book.save();
         res.redirect('books');
     } catch {
-        renderNewPage(res, new Book(), true);
+        renderNewPage(res, book, true);
     }
 })
 
@@ -73,7 +72,7 @@ function saveCover(book, coverEncoded) {
     const cover = JSON.parse(coverEncoded);
     if(cover != null && imageMimeTypes.includes(cover.type)) {
         book.coverImage = new Buffer.from(cover.data, 'base64');
-        book.coverImageType = cover.type
+        book.coverImageType = cover.type;
     }
 }
 
